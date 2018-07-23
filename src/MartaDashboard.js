@@ -19,7 +19,8 @@ class MartaDashboard extends React.Component {
     }).then((response) => {
         console.log('got the response');
         return response.json();
-    }).then(this._cleanUpMarta)
+    })
+    .then(this._cleanUpMarta)
     .then((jsonData) => {
         console.log(jsonData);
         console.log('got the data');
