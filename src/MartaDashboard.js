@@ -32,10 +32,24 @@ class MartaDashboard extends React.Component {
     });
   }
 
+  _convertTrainToElement = (train) => {
+    let trainPara = (
+      <p>
+        {train.DESTINATION},
+        {train.LINE},
+        {train.DIRECTION},
+        {train.WAITING_TIME}
+      </p>
+    );
+
+    return trainPara;
+  }
+
   render() {
     return (
       <div>
-        Marta! Why you late all the time???
+        <h1>Marta! Why you late all the time???</h1>
+        {this.state.data.map(this._convertTrainToElement)}
       </div>
     );
   }
