@@ -18,8 +18,9 @@ class MartaDashboard extends React.Component {
       method: 'get'
     }).then((response) => {
         console.log('got the response');
-        return response.json()
-    }).then((jsonData) => {
+        return response.json();
+    }).then(this._cleanUpMarta)
+    .then((jsonData) => {
         console.log(jsonData);
         console.log('got the data');
         this.setState({
@@ -32,9 +33,18 @@ class MartaDashboard extends React.Component {
     });
   }
 
+  _cleanUpMarta = (allTrainArray) => {
+    let trainsById = new Map();
+    allTrainArray.forEach(train => {
+      trainsById.set(train.TRAIN_ID, train);
+    });
+    let justTheTrains = trainsById.values();
+    return Array.from(justTheTrains);
+  }
+
   _convertTrainToElement = (train) => {
     let trainPara = (
-      <p>
+      <p key={train.TRAIN_ID}>
         {train.DESTINATION},
         {train.LINE},
         {train.DIRECTION},
