@@ -13,10 +13,26 @@ class MartaDashboard extends React.Component {
   }
 
   render() {
+    let redLineTrains = this.state.data.filter(train => {
+      return train.LINE.toLowerCase() === "red";
+    });
+    let greenLineTrains = this.state.data.filter(train => {
+      return train.LINE.toLowerCase() === "green";
+    });
+    let blueLineTrains = this.state.data.filter(train => {
+      return train.LINE.toLowerCase() === "blue";
+    });
+    let goldLineTrains = this.state.data.filter(train => {
+      return train.LINE.toLowerCase() === "gold";
+    });
+
     return (
       <div>
         <h1>Marta! Why you late all the time???</h1>
-        <MartaLine lineName="red" trainArray={this.state.data} />
+        <MartaLine trainArray={redLineTrains} />
+        <MartaLine trainArray={greenLineTrains} />
+        <MartaLine trainArray={blueLineTrains} />
+        <MartaLine trainArray={goldLineTrains} />
       </div>
     );
   }
