@@ -1,4 +1,5 @@
 import React from 'react';
+import MartaTrain from './MartaTrain';
 
 const MARTA_URL = 'https://my-little-cors-proxy.herokuapp.com/http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=2c514350-0c26-47dd-b872-7936af81c8e1';
 
@@ -44,16 +45,17 @@ class MartaDashboard extends React.Component {
   }
 
   _convertTrainToElement = (train) => {
-    let trainPara = (
-      <p key={train.TRAIN_ID}>
-        {train.DESTINATION},
-        {train.LINE},
-        {train.DIRECTION},
-        {train.WAITING_TIME}
-      </p>
-    );
+    // let trainPara = (
+    //   <p key={train.TRAIN_ID}>
+    //     {train.DESTINATION},
+    //     {train.LINE},
+    //     {train.DIRECTION},
+    //     {train.WAITING_TIME}
+    //   </p>
+    // );
 
-    return trainPara;
+    // return trainPara;
+    return <MartaTrain train={train} />
   }
 
   render() {
