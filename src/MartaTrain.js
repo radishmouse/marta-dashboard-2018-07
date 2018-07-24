@@ -9,6 +9,7 @@ const MartaTrain = ({train}) => {
   return (
     <div className="train-card">
       <p key={train.TRAIN_ID}>
+        {train.EVENT_TIME}:
         {train.DESTINATION},
         {train.LINE},
         {train.DIRECTION},

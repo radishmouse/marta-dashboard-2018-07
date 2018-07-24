@@ -13,7 +13,21 @@ class MartaDashboard extends React.Component {
     };
   }
 
+  render() {
+    return (
+      <div>
+        <h1>Marta! Why you late all the time???</h1>
+        {this.state.data.map(this._convertTrainToElement)}
+      </div>
+    );
+  }
+
   componentDidMount() {
+    this._getMartaData();
+    setInterval(this._getMartaData, 2000);
+  }
+
+  _getMartaData = () => {
     console.log('about to fetch!');
     fetch(MARTA_URL, {
       method: 'get'
@@ -22,6 +36,7 @@ class MartaDashboard extends React.Component {
         return response.json();
     })
     .then(this._cleanUpMarta)
+    .then(this._sortByEventTime)
     .then((jsonData) => {
         console.log(jsonData);
         console.log('got the data');
@@ -44,6 +59,41 @@ class MartaDashboard extends React.Component {
     return Array.from(justTheTrains);
   }
 
+  _sortByEventTime = (unsortedTrainArray) => {
+    // Two ways to copy an array!
+    // #1: use slice()
+    // let arrayToSort = unsortedTrainArray.slice();
+
+    // #2: use the "spread" operator
+    // (Sprinkles!)
+    let arrayToSort = [
+      ...unsortedTrainArray
+    ];
+
+    // Then sort the array.
+    arrayToSort.sort((paul, ringo) => {
+
+      let paulTime = new Date(paul.EVENT_TIME);
+      let ringoTime = new Date(ringo.EVENT_TIME);
+
+      // Does paul go before ringo?
+      if (paulTime < ringoTime) {
+        return -1;
+
+      // Does ringo go before paul?
+      } else if (ringoTime < paulTime) {
+        return 1;
+
+      // Nope. Leave Britney alone!
+      } else {
+        return 0;
+      }
+    })
+
+    // Return the result
+    return arrayToSort;
+  }
+
   _convertTrainToElement = (train) => {
     // let trainPara = (
     //   <p key={train.TRAIN_ID}>
@@ -58,14 +108,7 @@ class MartaDashboard extends React.Component {
     return <MartaTrain train={train} />
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Marta! Why you late all the time???</h1>
-        {this.state.data.map(this._convertTrainToElement)}
-      </div>
-    );
-  }
+
 }
 
 export default MartaDashboard;
