@@ -49,18 +49,25 @@ class MartaDashboard extends React.Component {
           visibleLineNames: ["green", "blue", "red", "gold"]
         })
     } else {
+
+      // Alternate version that will only show the line that you
+      // clicked on :)
+      this.setState({
+        visibleLineNames: [nameOfLine]
+      });
+
       // If not, check if nameOfLine is in this.state.visibleLineNames
-      if (this.state.visibleLineNames.includes(nameOfLine)) {
-        // If so, filter it out
-        this.setState({
-          visibleLineNames: this.state.visibleLineNames.filter(name => name !== nameOfLine)
-        })
-      } else {
-        // Otherwise, put it in.
-        this.setState({
-          visibleLineNames: this.state.visibleLineNames.concat(nameOfLine)
-        })
-      }
+      // if (this.state.visibleLineNames.includes(nameOfLine)) {
+      //   // If so, filter it out
+      //   this.setState({
+      //     visibleLineNames: this.state.visibleLineNames.filter(name => name !== nameOfLine)
+      //   })
+      // } else {
+      //   // Otherwise, put it in.
+      //   this.setState({
+      //     visibleLineNames: this.state.visibleLineNames.concat(nameOfLine)
+      //   })
+      // }
 
     }
   }
